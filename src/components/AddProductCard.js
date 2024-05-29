@@ -1,27 +1,36 @@
 "use client"
-import React, { useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import { CartContext } from './CartContext';
 
-const AddProductCard = ({ productName }) => {
-    const [count, setCount] = useState(0);
+const AddProductCard = ({product_id, productName}) => {
+    const { addToCart, cart, removeFromCart } = useContext(CartContext);
+    const [isAdded, setIsAdded] = useState(false);
 
-    const handleIncrement = () => {
-        setCount(count + 1);
+    useEffect(() => {
+        console.log(cart);
+    }, [cart]);
+
+    const handleAddToCart = () => {
+        addToCart({product_id, productName, amount: 1});
+        setIsAdded(true);
+        console.log(cart);
     };
 
-    const handleDecrement = () => {
-        if (count > 0) {
-            setCount(count - 1);
-        }
+    const handleRemoveFromCart = () => {
+        removeFromCart(product_id);
+        setIsAdded(false);
     };
 
     return (
-        <div style={{ backgroundColor: "white", color: "black", padding: "10px", borderRadius: "10px" }}>
+        <div style={{backgroundColor: "white", color: "black", padding: "10px", borderRadius: "10px"}}>
             <p>Product name: {productName}</p>
-            <div style={{ display: "flex", alignItems: "center" }}>
-                <p style={{ margin: "0 10px 0 0" }}>Amount: {count}</p>
-                <button onClick={handleDecrement} style={{ marginRight: "5px" }}>-</button>
-                <button onClick={handleIncrement}>+</button>
-            </div>
+            <button style={{
+                borderRadius: "10px",
+                border: "2px solid black",
+                padding: "5px 10px"
+            }} onClick={isAdded ? handleRemoveFromCart : handleAddToCart}>
+                {isAdded ? "Sacar del carrito" : "Agregar al carrito"}
+            </button>
         </div>
     );
 };
