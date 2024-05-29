@@ -1,7 +1,10 @@
 "use client"
 import React, { useState } from 'react';
 
-const OrderCard = ({ orderId, orderState, products }) => {
+const OrderCard = ({ orderId, orderState, products, onCancel }) => {
+    const handleCancel = () => {
+        onCancel(orderId);
+    };
     return (
         <div style={{
             backgroundColor: "white",
@@ -21,6 +24,19 @@ const OrderCard = ({ orderId, orderState, products }) => {
                     <li key={index}>{product.productName} - Amount: {product.amount}</li>
                 ))}
             </ul>
+            <button
+                onClick={handleCancel}
+                style={{
+                    backgroundColor: "red",
+                    color: "white",
+                    border: "2px solid black",
+                    borderRadius: "10px",
+                    padding: "10px 20px",
+                    cursor: "pointer"
+                }}
+            >
+                Cancel
+            </button>
         </div>
     );
 };

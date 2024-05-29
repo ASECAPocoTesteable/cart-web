@@ -8,8 +8,8 @@ const RegisterPage = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const handleRegister = () => {
-        if (!email || !address) {
-            setErrorMessage("Please enter both email and address.");
+        if (!email) {
+            setErrorMessage("Please enter a email.");
             return;
         }
 
@@ -25,7 +25,7 @@ const RegisterPage = () => {
         setErrorMessage("");
     };
 
-    const isButtonDisabled = !email || !address || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const isButtonDisabled = !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     return (
         <div style={{
@@ -36,19 +36,12 @@ const RegisterPage = () => {
             height: "100vh",
             justifyContent: "center"
         }}>
-            <h1>Register</h1>
+            <h1>Log in</h1>
             <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ccc", width: "300px", color: "black" }}
-            />
-            <input
-                type="text"
-                placeholder="Address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
                 style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ccc", width: "300px", color: "black" }}
             />
             {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
@@ -65,7 +58,7 @@ const RegisterPage = () => {
                             color: "black"
                         }}
                     >
-                        Register
+                        Log in
                     </button>
                 </Link>
             )}

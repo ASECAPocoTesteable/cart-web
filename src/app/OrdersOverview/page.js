@@ -1,10 +1,11 @@
-import React from "react";
+"use client"
+import React, {useState} from "react";
 import NavBar from "@/components/NavBar";
 import OrderCard from "@/components/OrderCard";
 
 const CartOverviewPage = () => {
     // Datos de ejemplo para las órdenes
-    const orders = [
+    const [orders, setOrders] = useState([
         {
             orderId: 1,
             orderState: "Pending",
@@ -29,7 +30,11 @@ const CartOverviewPage = () => {
                 { productName: "Product 6", amount: 1 },
             ],
         },
-    ];
+    ]);
+
+    const handleCancel = (orderId) => {
+        setOrders(prevOrders => prevOrders.filter(order => order.orderId !== orderId));
+    };
 
     return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "30px" }}>
@@ -43,6 +48,9 @@ const CartOverviewPage = () => {
                             orderId={order.orderId}
                             orderState={order.orderState}
                             products={order.products}
+                            onCancel={(orderId) => {
+                                handleCancel(orderId);
+                            }}
                         />
                     ))}
                 </div>
