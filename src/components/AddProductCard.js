@@ -2,7 +2,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { CartContext } from './CartContext';
 
-const AddProductCard = ({product_id, productName, initialIsAdded}) => {
+const AddProductCard = ({product_id, productName, initialIsAdded, price}) => {
     const { addToCart, cart, removeFromCart } = useContext(CartContext);
     const [isAdded, setIsAdded] = useState(initialIsAdded);
 
@@ -11,7 +11,7 @@ const AddProductCard = ({product_id, productName, initialIsAdded}) => {
     }, [cart]);
 
     const handleAddToCart = () => {
-        addToCart({product_id, productName, amount: 1});
+        addToCart({product_id, productName, amount: 1, price: price});
         setIsAdded(true);
         console.log(cart);
     };

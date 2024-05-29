@@ -2,7 +2,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { CartContext } from './CartContext';
 
-const ProductCard = ({product_id, productName, initialAmount = 1, onRemove}) => {
+const ProductCard = ({product_id, productName, initialAmount = 1, onRemove, price}) => {
     const {removeFromCart, updateProductAmount, cart} = useContext(CartContext);
     const [amount, setAmount] = useState(initialAmount);
 
@@ -20,6 +20,8 @@ const ProductCard = ({product_id, productName, initialAmount = 1, onRemove}) => 
         removeFromCart(product_id);
     };
 
+    const totalPrice = amount * price;
+
     return (
         <div style={{
             backgroundColor: "white",
@@ -32,6 +34,7 @@ const ProductCard = ({product_id, productName, initialAmount = 1, onRemove}) => 
             textAlign: "center"
         }}>
             <p>Product name: {productName}</p>
+            <p>Total price: {totalPrice}</p>
             <div style={{display: "flex", alignItems: "center", marginBottom: "10px"}}>
                 <p style={{margin: "0 10px 0 0"}}>Amount: </p>
                 <input

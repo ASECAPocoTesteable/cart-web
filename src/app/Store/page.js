@@ -7,9 +7,9 @@ import { CartContext } from "@/components/CartContext";
 const StorePage = () => {
     const { cart } = useContext(CartContext);
     const products = [
-        { id: 1, name: "Product 1" },
-        { id: 2, name: "Product 2" },
-        { id: 3, name: "Product 3" },
+        { id: 1, name: "Product 1", price: 1},
+        { id: 2, name: "Product 2", price: 10},
+        { id: 3, name: "Product 3", price: 100 },
     ];
 
     return (
@@ -26,6 +26,7 @@ const StorePage = () => {
                                 product_id={product.id}
                                 productName={product.name}
                                 initialIsAdded={isAdded}
+                                price={product.price}
                             />
                         );
                     })}

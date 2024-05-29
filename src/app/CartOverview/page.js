@@ -5,7 +5,7 @@ import ProductCard from "@/components/ProductCard";
 import { CartContext } from "@/components/CartContext";
 
 const CartOverviewPage = () => {
-    const { addToCart, cart, removeFromCart, setCartItemsEmpty } = useContext(CartContext);
+    const { addToCart, cart, removeFromCart, setCartItemsEmpty, calculateTotal } = useContext(CartContext);
     const [showSuccessToast, setShowSuccessToast] = useState(false);
     const [showErrorToast, setShowErrorToast] = useState(false);
 
@@ -42,10 +42,12 @@ const CartOverviewPage = () => {
                             product_id={product.product_id}
                             productName={product.productName}
                             amount={product.amount}
+                            price={product.price}
                             onRemove={() => handleRemove(product.product_id)}
                         />
                     ))}
                 </div>
+                <h2>Total: {calculateTotal()}</h2>
                 {cart.length > 0 && (
                     <button
                         onClick={handleCheckout}
