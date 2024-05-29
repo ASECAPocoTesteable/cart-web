@@ -2,9 +2,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { CartContext } from './CartContext';
 
-const AddProductCard = ({product_id, productName}) => {
+const AddProductCard = ({product_id, productName, initialIsAdded}) => {
     const { addToCart, cart, removeFromCart } = useContext(CartContext);
-    const [isAdded, setIsAdded] = useState(false);
+    const [isAdded, setIsAdded] = useState(initialIsAdded);
 
     useEffect(() => {
         console.log(cart);

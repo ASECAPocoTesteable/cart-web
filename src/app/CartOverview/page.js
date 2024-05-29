@@ -1,26 +1,23 @@
 "use client"
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import NavBar from "@/components/NavBar";
 import ProductCard from "@/components/ProductCard";
+import { CartContext } from "@/components/CartContext";
 
 const CartOverviewPage = () => {
-    const [products, setProducts] = useState([
-        { id: 1, productName: "Product 1", amount: 10 },
-        { id: 2, productName: "Product 2", amount: 5 },
-        { id: 3, productName: "Product 3", amount: 2 },
-    ]);
+    const { addToCart, cart, removeFromCart, setCartItemsEmpty } = useContext(CartContext);
     const [showSuccessToast, setShowSuccessToast] = useState(false);
     const [showErrorToast, setShowErrorToast] = useState(false);
 
     const handleRemove = (id) => {
-        setProducts(products.filter(product => product.id !== id));
+        removeFromCart(id);
     };
 
     const handleCheckout = () => {
         // Simulate successful checkout
         const hasEnoughStock = true;
         if (hasEnoughStock) {
-            setProducts([]);
+            setCartItemsEmpty();
             setShowSuccessToast(true);
         } else {
             setShowErrorToast(true);
@@ -39,16 +36,16 @@ const CartOverviewPage = () => {
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "30px" }}>
                 <h1>Cart:</h1>
                 <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                    {products.map((product) => (
+                    {cart.map((product) => (
                         <ProductCard
-                            key={product.id}
+                            key={product.product_id}
                             productName={product.productName}
                             amount={product.amount}
-                            onRemove={() => handleRemove(product.id)}
+                            onRemove={() => handleRemove(product.product_id)}
                         />
                     ))}
                 </div>
-                {products.length > 0 && (
+                {cart.length > 0 && (
                     <button
                         onClick={handleCheckout}
                         style={{
