@@ -39,6 +39,7 @@ const CartOverviewPage = () => {
                     {cart.map((product) => (
                         <ProductCard
                             key={product.product_id}
+                            product_id={product.product_id}
                             productName={product.productName}
                             amount={product.amount}
                             onRemove={() => handleRemove(product.product_id)}

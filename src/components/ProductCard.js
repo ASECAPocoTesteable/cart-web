@@ -1,20 +1,24 @@
 "use client"
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { CartContext } from './CartContext';
 
-const ProductCard = ({productName, initialAmount = 1, onRemove}) => {
-    const {removeFromCart} = useContext(CartContext);
+const ProductCard = ({product_id, productName, initialAmount = 1, onRemove}) => {
+    const {removeFromCart, updateProductAmount, cart} = useContext(CartContext);
     const [amount, setAmount] = useState(initialAmount);
+
+    useEffect(() => {
+        console.log(cart);
+    }, [cart]);
 
     const handleAmountChange = (e) => {
         const newAmount = Math.max(1, parseInt(e.target.value) || 1);
         setAmount(newAmount);
+        updateProductAmount(product_id, newAmount);
     };
 
     const handleRemove = () => {
-        removeFromCart(productName);
+        removeFromCart(product_id);
     };
-
 
     return (
         <div style={{
@@ -38,7 +42,7 @@ const ProductCard = ({productName, initialAmount = 1, onRemove}) => {
                     style={{
                         width: "50px",
                         textAlign: "center",
-                        border: "2px solid black", // Añadir borde negro
+                        border: "2px solid black",
                         borderRadius: "5px"
                     }}
                 />
