@@ -48,9 +48,6 @@ const CartOverviewPage = () => {
                             orderId={order.orderId}
                             orderState={order.orderState}
                             products={order.products}
-                            onCancel={(orderId) => {
-                                handleCancel(orderId);
-                            }}
                         />
                     ))}
                 </div>

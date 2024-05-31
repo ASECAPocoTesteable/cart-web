@@ -24,6 +24,7 @@ const AddProductCard = ({product_id, productName, initialIsAdded, price}) => {
     return (
         <div style={{backgroundColor: "white", color: "black", padding: "10px", borderRadius: "10px"}}>
             <p>Product name: {productName}</p>
+            <p>Price: {price}</p>
             <button style={{
                 borderRadius: "10px",
                 border: "2px solid black",
