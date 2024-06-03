@@ -1,11 +1,12 @@
 "use client"
 import React, {useContext, useState} from "react";
+import axios from 'axios';
 import NavBar from "@/components/NavBar";
 import ProductCard from "@/components/ProductCard";
 import {CartContext} from "@/components/CartContext";
 
 const CartOverviewPage = () => {
-    const {addToCart, cart, removeFromCart, setCartItemsEmpty, calculateTotal} = useContext(CartContext);
+    const {cart, removeFromCart, setCartItemsEmpty, calculateTotal} = useContext(CartContext);
     const [showSuccessToast, setShowSuccessToast] = useState(false);
     const [showErrorToast, setShowErrorToast] = useState(false);
     const [address, setAddress] = useState('');
@@ -15,7 +16,7 @@ const CartOverviewPage = () => {
         removeFromCart(id);
     };
 
-    const handleCheckout = () => {
+    const handleCheckout = async () => {
         if (address.trim() === '') {
             setShowAddressToast(true);
             setTimeout(() => {
@@ -24,12 +25,20 @@ const CartOverviewPage = () => {
             return;
         }
 
-        // Simulate successful checkout
-        const hasEnoughStock = true;
-        if (hasEnoughStock) {
-            setCartItemsEmpty();
-            setShowSuccessToast(true);
-        } else {
+        try {
+            const response = await axios.post('http://localhost:8080/order/checkout', {
+                products: cart.map(item => ({ productId: item.product_id, quantity: item.amount })),
+                direction: address,
+            });
+
+            if (response.status === 200) {
+                setCartItemsEmpty();
+                setShowSuccessToast(true);
+            } else {
+                setShowErrorToast(true);
+            }
+        } catch (error) {
+            console.error('Error during checkout:', error);
             setShowErrorToast(true);
         }
 
