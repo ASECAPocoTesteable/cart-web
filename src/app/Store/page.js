@@ -10,7 +10,7 @@ const StorePage = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/shop')
+        axios.get('http://controltowerpt:8080/shop')
             .then(response => {
                 setProducts(response.data);
             })
