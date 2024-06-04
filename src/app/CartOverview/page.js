@@ -26,7 +26,7 @@ const CartOverviewPage = () => {
         }
 
         try {
-            const response = await axios.post('http://controltowerpt:8080/order/checkout', {
+            const response = await axios.post('http://localhost:8080/order/checkout', {
                 products: cart.map(item => ({ productId: item.product_id, quantity: item.amount })),
                 direction: address,
             });
