@@ -32,8 +32,3 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/asecapocotesteable/cartweb:latest
-          build-args: |
-            PORT=${{ secrets.PORT }}
-            DATABASE_URL=${{ secrets.DATABASE_URL }}
-            DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}
-            DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
