@@ -21,4 +21,21 @@ describe('Cart Overview Page', () => {
         cy.get('button').contains('Checkout').click();
         cy.contains('Order sent successfully!').should('be.visible');
     });
+
+    it('should not complete checkout with invalid address', () => {
+        cy.get('input#address').type('Calle Falsa 123');
+        cy.get('button').contains('Checkout').click();
+        cy.contains('Invalid address').should('be.visible');
+    });
+
+    it('should not complete checkout with empty cart', () => {
+        cy.get('.product-card').each(() => {
+            cy.get('.product-card').first().find('button').contains('Eliminar del carrito').click();
+        });
+        cy.get('input#address').type('Avenida Siempreviva 742');
+        cy.get('button').contains('Checkout').click();
+        cy.contains('Empty cart').should('be.visible');
+    });
+
+
 });

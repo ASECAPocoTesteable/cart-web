@@ -11,4 +11,12 @@ describe('Orders Overview Page', () => {
         cy.wait('@getOrders');
         cy.contains('Order ID:').should('be.visible');
     });
+
+    it('should display appropriate message when there are no orders', () => {
+        cy.visit('/OrdersOverview');
+        cy.intercept('GET', '/order/getAll', { fixture: 'noOrders.json' }).as('getNoOrders');
+        cy.reload();
+        cy.wait('@getNoOrders');
+        cy.contains('No orders found').should('be.visible');
+    });
 });
