@@ -29,6 +29,7 @@ const StorePage = () => {
                         const isAdded = cart.some(cartProduct => cartProduct.product_id === product.id);
                         return (
                             <AddProductCard
+                                className="add-product-card"
                                 key={product.id}
                                 product_id={product.id}
                                 productName={product.name}
