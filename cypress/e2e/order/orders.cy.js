@@ -17,6 +17,6 @@ describe('Orders Overview Page', () => {
         cy.intercept('GET', '/order/getAll', { fixture: 'noOrders.json' }).as('getNoOrders');
         cy.reload();
         cy.wait('@getNoOrders');
-        cy.contains('No orders found').should('be.visible');
+        cy.contains('No orders available').should('be.visible');
     });
 });
