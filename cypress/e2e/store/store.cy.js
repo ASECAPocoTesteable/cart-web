@@ -6,6 +6,7 @@ describe('Store Page', () => {
     });
 
     it('should add a product to the cart', () => {
+        cy.intercept('GET', 'http://controltowerpt:8080/shop', { fixture: 'product.json' }).as('getProducts');
         cy.visit('/Store');
         cy.contains('Agregar al carrito').first().click();
         cy.contains('Sacar del carrito').should('be.visible');
