@@ -1,0 +1,9 @@
+{
+  "products": [
+    {
+      "productId": 1,
+      "quantity": 1
+    }
+  ],
+  "direction": "Calle 123"
+}

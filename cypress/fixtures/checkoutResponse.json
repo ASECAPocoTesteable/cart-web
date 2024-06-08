@@ -1,0 +1,14 @@
+{
+  "id": 5,
+  "clientDirection": "Calle 123",
+  "state": "PREPARING",
+  "warehouseDirection": "Avenida simpatica de tuquito 123",
+  "productOrders": [
+    {
+      "id": 1,
+      "name": "Product1",
+      "price": 100.0,
+      "quantity": 1
+    }
+  ]
+}

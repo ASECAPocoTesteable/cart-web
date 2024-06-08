@@ -57,6 +57,7 @@ const CartOverviewPage = () => {
                 <div style={{display: "flex", flexDirection: "column", gap: "10px"}}>
                     {cart.map((product) => (
                         <ProductCard
+                            className="product-card"
                             key={product.product_id}
                             product_id={product.product_id}
                             productName={product.productName}
